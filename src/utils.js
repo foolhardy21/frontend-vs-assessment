@@ -26,23 +26,23 @@ export const HANDLES_CONFIG = {
         { type: "source", position: "Right", idSuffix: "output", style: {} },
     ],
     file: [
-        { type: "source", position: "Right", idSuffix: "file", style: {} },
+        { type: "source", position: "Right", idSuffix: "output", style: {} },
     ],
     agent: [
-        { type: "target", position: "Left", idSuffix: "agent", style: {} },
-        { type: "source", position: "Right", idSuffix: "agent", style: {} },
+        { type: "target", position: "Left", idSuffix: "input", style: {} },
+        { type: "source", position: "Right", idSuffix: "output", style: {} },
     ],
     image: [
-        { type: "target", position: "Left", idSuffix: "image", style: {} },
-        { type: "source", position: "Right", idSuffix: "image", style: {} },
+        { type: "target", position: "Left", idSuffix: "input", style: {} },
+        { type: "source", position: "Right", idSuffix: "output", style: {} },
     ],
     openai: [
-        { type: "target", position: "Left", idSuffix: "openai", style: {} },
-        { type: "source", position: "Right", idSuffix: "openai", style: {} },
+        { type: "target", position: "Left", idSuffix: "input", style: {} },
+        { type: "source", position: "Right", idSuffix: "output", style: {} },
     ],
     transformation: [
-        { type: "target", position: "Left", idSuffix: "transformation", style: {} },
-        { type: "source", position: "Right", idSuffix: "transformation", style: {} },
+        { type: "target", position: "Left", idSuffix: "input", style: {} },
+        { type: "source", position: "Right", idSuffix: "output", style: {} },
     ],
 }
 

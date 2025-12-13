@@ -21,35 +21,3 @@ export const PipelineToolbar = () => {
         </div>
     );
 };
-
-
-/**
- * Each node has it's own:
- * title, icon
- * input fields or content
- * onchange handlers of these inputs
- * handles - their positions, type and unique id
- */
-
-/**
- * All nodes have common:
- * remove btn
- * minimize btn
- * basic styling
- * error state
- * 
- */
-
-/**
- * create one file of a node
- * pass children as jsx with styling. Common jsx and styling will be in that file. individual change handlers, jsx and css will be in
- * the file using the common ndoe file.
- */
-
-
-/**
- * base node:
- * has id and data which will be needed by the child node component
- * 
- * 
- */

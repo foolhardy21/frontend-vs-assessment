@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 const OutputNode = ({ id, data }) => {
-  const [currName, setCurrName] = useState(data?.outputName || id.replace('customOutput-', 'output_'));
+  const [currName, setCurrName] = useState(id);
   const [outputType, setOutputType] = useState(data.outputType || 'Text');
 
   const handleNameChange = (e) => {
@@ -16,15 +16,8 @@ const OutputNode = ({ id, data }) => {
 
   return (
     <>
+      {id}
       <div>
-        <label>
-          Name:
-          <input
-            type="text"
-            value={currName}
-            onChange={handleNameChange}
-          />
-        </label>
         <label>
           Type:
           <select value={outputType} onChange={handleTypeChange}>

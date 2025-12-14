@@ -4,10 +4,9 @@ import { SubmitButton } from './submit';
 
 function App() {
   return (
-    <div>
+    <div className='m-2 rounded-md border border-[rgba(0,0,0,0.2)] bg-white'>
       <PipelineToolbar />
       <PipelineUI />
-      <SubmitButton />
     </div>
   );
 }

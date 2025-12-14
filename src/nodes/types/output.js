@@ -16,11 +16,11 @@ const OutputNode = ({ id, data }) => {
 
   return (
     <>
-      {id}
-      <div>
-        <label>
+      <p className="text-center w-full text-[12px] text-black bg-tertiary rounded py-1 border border-tertiary">{id}</p>
+      <div className="mt-4">
+        <label className="text-[12px] text-black flex flex-col">
           Type:
-          <select value={outputType} onChange={handleTypeChange}>
+          <select value={outputType} onChange={handleTypeChange} className="border border-gray p-1">
             <option value="Text">Text</option>
             <option value="File">Image</option>
           </select>

@@ -16,7 +16,7 @@ const InputNode = ({ id, data }) => {
 
   return (
     <>
-      {id}
+      <p className="text-center w-full text-[12px] text-black bg-tertiary rounded py-1 border border-tertiary">{id}</p>
       <div>
         <label>
           Type:

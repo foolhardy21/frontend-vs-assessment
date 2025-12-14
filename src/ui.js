@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 import { useState, useRef, useCallback } from 'react';
-import ReactFlow, { Controls, Background, MiniMap } from 'reactflow';
+import ReactFlow, { Controls, Background, MiniMap, Panel } from 'reactflow';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
 import withBaseNode from './nodes/baseNode';
@@ -95,7 +95,7 @@ export const PipelineUI = () => {
 
   return (
     <>
-      <div ref={reactFlowWrapper} style={{ width: '100wv', height: '70vh' }}>
+      <div ref={reactFlowWrapper} style={{ width: '100wv', height: '80vh' }}>
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -111,8 +111,15 @@ export const PipelineUI = () => {
           connectionLineType='smoothstep'
         >
           <Background color="#aaa" gap={gridSize} />
-          <Controls />
-          <MiniMap />
+          <Controls
+            position={"bottom-right"}
+            style={{
+              right: "210px",
+            }}
+          />
+          <MiniMap
+            nodeColor={"rgb(238,242,255)"}
+          />
         </ReactFlow>
       </div>
     </>

@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains a React-based drag-and-drop pipeline editor using React Flow. It includes a small node system, dynamic handles, and Tailwind CSS for styling. The project was bootstrapped with Create React App.
 
-## Available Scripts
+# Backend
+Backend code is pushed [on this repo](https://github.com/foolhardy21/backend-vs-assessment)
 
-In the project directory, you can run:
+## Tech stack
 
-### `npm start`
+- React 18
+- React Flow (graph/flow UI)
+- Zustand (lightweight state management)
+- Tailwind CSS (utility-first CSS)
+- PostCSS + Autoprefixer (CSS processing)
+- Create React App (build/dev toolchain)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js (16+) and npm
+- Git (optional)
 
-### `npm test`
+## Install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Install dependencies:
 
-### `npm run build`
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Development (run)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Start the dev server:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm run start
+```
 
-### `npm run eject`
+Open http://localhost:3000 in your browser.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Build
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Project structure (important files)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `src/` - React source
+  - `App.js` - app root
+  - `index.js` - entry; imports `src/index.css`
+  - `index.css` - global CSS + Tailwind directives
+  - `ui.js` - React Flow pipeline UI
+  - `store.js` - Zustand store for nodes/edges
+  - `nodes/` - node components and types
+  - `baseNode.js` - HOC that renders `Handle` components
+  - `types/` - node type implementations (text, file, image, etc.)
+  - `utils.js` - handles configuration and draggable node list
 
-## Learn More
+## How the node handles/edges work
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Each node type declares handles via `HANDLES_CONFIG` (in `src/utils.js`).
+- The `withBaseNode` HOC renders a `Handle` for each handle entry and uses the `idSuffix` as the handle `id` (so edges should reference the plain `idSuffix`, not `nodeId-idSuffix`).
+- When programmatically creating edges, use the node `id` for `source`/`target` and the handle `idSuffix` for `sourceHandle`/`targetHandle`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Example connection object:
 
-### Code Splitting
+```js
+{
+  source: 'file-1',
+  sourceHandle: 'file',
+  target: 'text-1',
+  targetHandle: 'input',
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Troubleshooting
 
-### Analyzing the Bundle Size
+- Tailwind styles not applied:
+  - Ensure `src/index.css` contains the `@tailwind` directives and is imported by `src/index.js`.
+  - Ensure only one PostCSS config is present (prefer `postcss.config.js` with CommonJS export):
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```js
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
 
-### Making a Progressive Web App
+- Restart the dev server after changing configs.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Edge creation errors (React Flow):
+    - Confirm handle ids used in connections are the plain `idSuffix` values (not prefixed by node id).
+    - Log `getEdges()` and the connection object before calling `setEdges` to verify values.
